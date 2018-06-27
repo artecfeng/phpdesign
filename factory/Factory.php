@@ -32,6 +32,7 @@
             if (!self::$db) {
                 self::$db = new self();
             }
+
             return self::$db;
         }
 
@@ -60,6 +61,7 @@
             if (!self::$db) {
                 self::$db = new self();
             }
+
             return self::$db;
         }
 
@@ -75,34 +77,18 @@
     }
 
     class MysqlFactory implements FactoryInterface {
-        protected static $db;
-
-        private function __construct() {
-            //防止new
-        }
-
-        private function __clone() {
-            // TODO: Implement __clone() method.
-            //防止克隆
-        }
-
-        //单例模式
-        public static function getInstance() {
-            if (!self::$db) {
-                self::$db = new self();
-            }
-            return self::$db;
-        }
-
         public static function newDb() {
             // TODO: Implement newDb() method.
-            return MysqlDriver::getInstance();
+             $db = MysqlDriver::getInstance();
+            Register::set('mysql',self::$db);
+             return $db;
         }
     }
 
     class OracleFactory implements FactoryInterface {
         public static function newDb() {
-            // TODO: Implement newDb() method.
-            return OracleDriver::getInstance();
+            $db = OracleDriver::getInstance();
+            Register::set('oracle',self::$db);
+            return $db;
         }
     }
