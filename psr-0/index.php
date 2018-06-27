@@ -18,3 +18,6 @@
     $controller = new \App\Controller\IndexController();
     //action
     echo $controller->index();
+    //链式操作
+    $db = new \Artec\MysqlDriver();
+    $db->where('id = 10')->order('name desc')->query();
